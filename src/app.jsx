@@ -7,7 +7,7 @@ var Route = ReactRouter.Route;
 var Hello = React.createClass({
   render: function() {
     return <h1 className="red">
-      Hello!
+      {this.props.children}
     </h1>
   }
 });
@@ -24,5 +24,15 @@ var Child2 = React.createClass({
   }
 });
 
-var element = React.createElement(Hello, {});
-React.render(element, document.querySelector('.container'));
+var routes = (
+  <Router history={new HashHistory}>
+    <Route path="/" component={Hello}>
+      <Route path="1" component={Child1}/>
+      <Route path="2" component={Child2}/>
+    </Route>
+  </Router>
+)
+
+
+// var element = React.createElement(Hello, {});
+React.render(routes, document.querySelector('.container'));
